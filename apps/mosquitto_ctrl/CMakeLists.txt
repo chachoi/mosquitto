@@ -57,6 +57,10 @@ if(WITH_TLS AND CJSON_FOUND)
 		cJSON
 	)
 
+	if(QNX)
+		target_link_libraries(mosquitto_ctrl PRIVATE crypto)
+	endif()
+
 	if (WITH_THREADING AND NOT WIN32)
 		set(THREADS_PREFER_PTHREAD_FLAG ON)
 		find_package(Threads REQUIRED)

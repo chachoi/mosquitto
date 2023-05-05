@@ -28,6 +28,13 @@ target_include_directories(mosquitto_db_dump PRIVATE
 	"${mosquitto_SOURCE_DIR}/src"
 )
 
+if(QNX)
+	target_include_directories(mosquitto_db_dump PRIVATE
+		"${mosquitto_SOURCE_DIR}/deps"
+	)
+	target_link_libraries(mosquitto_db_dump PRIVATE ssl)
+endif()
+
 install(TARGETS mosquitto_db_dump
 	RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 )

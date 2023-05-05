@@ -23,6 +23,10 @@ if(WITH_TLS)
 		OpenSSL::SSL
 	)
 
+	if(QNX)
+		target_link_libraries(mosquitto_passwd PRIVATE crypto)
+	endif()
+
 	install(TARGETS mosquitto_passwd
 		RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 	)

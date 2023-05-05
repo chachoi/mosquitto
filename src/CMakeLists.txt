@@ -89,7 +89,7 @@ if(HAVE_SYS_EVENT_H)
 endif()
 
 find_path(HAVE_SYS_EPOLL_H sys/epoll.h)
-if(HAVE_SYS_EPOLL_H)
+if(HAVE_SYS_EPOLL_H AND NOT QNX)
 	add_definitions("-DWITH_EPOLL")
 endif()
 
@@ -152,6 +152,9 @@ add_definitions (-DWITH_BROKER)
 
 if(WITH_TLS)
 	set (MOSQ_LIBS ${MOSQ_LIBS} OpenSSL::SSL)
+	if(QNX)
+		set (MOSQ_LIBS ${MOSQ_LIBS} crypto)
+	endif()
 endif()
 # Check for getaddrinfo_a
 include(CheckLibraryExists)

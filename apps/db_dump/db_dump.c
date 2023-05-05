@@ -37,6 +37,10 @@ Contributors:
 #define _mosquitto_free(A) free((A))
 #include <uthash.h>
 
+#ifdef __QNXNTO__
+#include <arpa/inet.h>
+#endif
+
 #include "db_dump.h"
 
 struct client_data

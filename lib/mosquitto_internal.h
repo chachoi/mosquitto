@@ -63,7 +63,7 @@ Contributors:
 #include "mosquitto.h"
 #include "time_mosq.h"
 #ifdef WITH_BROKER
-#  ifdef __linux__
+#  if defined(__linux__) || defined(__QNXNTO__)
 #    include <netdb.h>
 #  endif
 #  include "uthash.h"

@@ -61,6 +61,10 @@ set(BINARIES
     11-prop-send-payload-format
 )
 
+if(QNX)
+    list(REMOVE_ITEM BINARIES 03-publish-loop-manual)
+endif()
+
 foreach(BINARY ${BINARIES})
     set(TARGET "${BINARY}-cpp")
     add_executable(${TARGET} ${BINARY}.cpp)

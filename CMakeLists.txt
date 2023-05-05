@@ -43,7 +43,15 @@ option(WITH_TLS_PSK "Include TLS-PSK support (requires WITH_TLS)?" ON)
 option(WITH_EC "Include Elliptic Curve support (requires WITH_TLS)?" ON)
 option(WITH_TESTS "Enable tests" ON)
 if (WITH_TLS)
-	find_package(OpenSSL REQUIRED)
+	if(QNX)
+		add_library(OpenSSL::SSL INTERFACE IMPORTED)
+
+		set_target_properties(OpenSSL::SSL PROPERTIES
+			INTERFACE_LINK_LIBRARIES ssl
+		)
+    else()
+        find_package(OpenSSL REQUIRED)
+    endif()
 	add_definitions("-DWITH_TLS")
 
 	if (WITH_TLS_PSK)
